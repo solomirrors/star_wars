@@ -3,12 +3,38 @@
     opacity: 0.8;
     border: 2px solid #bbb4b4;
     border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+
 }
 
-.random-planet-widget{
-    align-items: center;
+.random-planet-image{
     width: 100%;
     height: 100%;
-
+    max-width: 256px;
+    max-height: 256px;
+    min-width: 256px;
+    min-height: 256px;
     border-radius: 20px 0px 0px 20px;
+}
+
+.random-planet-name{
+    color: #f6ff00;
+    font-size: 48px;
+    font-family: 'Teko';
+    font-weight: 700;
+    color: #f6ff00;
+    line-height: 1;
+}
+
+.random-planet-description{
+    font-family: Rajdhani;
+    font-weight: 400;
+    font-size: 44px;
+}
+
+@media (max-width: 769px) {
+    .random-planet-bar{
+        text-align: center;
+    }
 }
