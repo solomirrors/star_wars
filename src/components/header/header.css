@@ -1,0 +1,29 @@
+.header-bar{
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-star-wars{
+    font-size: 72px;
+    font-family: 'Teko';
+    font-weight: 700;
+    color: #ffc400;
+    line-height: 1;
+    text-align: center;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-link{
+    font-family: Rajdhani;
+    font-weight: 400;
+    font-size: 32px;
+    color: #fff;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
