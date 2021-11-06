@@ -8,22 +8,35 @@
     font-size: 72px;
     font-family: 'Teko';
     font-weight: 700;
-    color: #ffc400;
+    color: #f6ff00;
     line-height: 1;
-    text-align: center;
+    padding-top: 10px;
+    display: flex;
+    align-content: center;
+    justify-content: left;
+}
+
+.header-link-panel{
+    font-family: Rajdhani;
+    font-weight: 400;
+    font-size: 44px;
     display: flex;
     align-content: center;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
 }
 
 .header-link{
-    font-family: Rajdhani;
-    font-weight: 400;
-    font-size: 32px;
-    color: #fff;
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
+    color: #ffffff;
+}
+
+.header-link:hover{
+    color: #f6ff00;
+}
+
+@media (max-width: 769px) {
+    .header-star-wars{
+        text-align: center;
+        justify-content: center;
+    }
 }
