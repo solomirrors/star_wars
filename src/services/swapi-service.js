@@ -1,10 +1,4 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from "./components/app";
-import './index.css';
-
-
-class SwapiService {
+export default class SwapiService {
     _apiBase = 'https://swapi.dev/api'
 
     async getResource(url){
@@ -47,12 +41,3 @@ class SwapiService {
         return this.getResource(`/starships/${id}`)
     }
 }
-
-const swapi = new SwapiService();
-
-swapi.getPerson(3).then((p) => {
-    console.log(p.name);
-});
-
-
-ReactDOM.render(<App/>, document.getElementById('root'));
