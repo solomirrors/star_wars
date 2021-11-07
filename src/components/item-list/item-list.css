@@ -1,0 +1,14 @@
+.item-list-bar{
+    background: #2d2e33;
+    opacity: 0.8;
+    border: 2px solid #bbb4b4;
+    border-radius: 20px;
+    justify-content: left;
+
+}
+
+.item-list-item{
+    font-family: Rajdhani;
+    font-weight: 400;
+    font-size: 24px;
+}
