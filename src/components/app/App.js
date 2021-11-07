@@ -6,12 +6,14 @@ import PlanetDetails from "../planet-details";
 import RandomPlanet from "../random-planet";
 import StarshipDetails from "../starship-details";
 import './App.css';
+import RandomPerson from "../random-person";
 
 export default class App extends Component{
   render() {
     return (
         <div>
             <Header/>
+            <RandomPerson/>
             <RandomPlanet/>
             <ItemList/>
             <ItemList/>
