@@ -1,0 +1,52 @@
+.random-person-bar{
+    background: #2d2e33;
+    opacity: 0.8;
+    border: 2px solid #bbb4b4;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.random-person-bar-image{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.random-person-image{
+    max-width: 60%;
+    max-height: 60%;
+    border-radius: 20px 0px 0px 20px;
+    background-size: contain;
+}
+
+.random-person-name{
+    color: #f6ff00;
+    font-size: 48px;
+    font-family: 'Teko';
+    font-weight: 700;
+    color: #f6ff00;
+    line-height: 1;
+    text-align: center;
+}
+
+.random-person-description{
+    font-family: Rajdhani;
+    font-weight: 400;
+    font-size: 44px;
+}
+
+@media (max-width: 769px) {
+    .random-person-bar{
+        text-align: center;
+    }
+    .random-person-bar-name{
+        order: 0;
+    }
+    .random-person-bar-image{
+        order: 1;
+    }
+    .random-person-bar-description{
+        order: 2
+    }
+}

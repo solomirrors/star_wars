@@ -42,6 +42,12 @@
         text-align: center;
     }
     .random-planet-bar-name{
-        order: -1;
+        order: 0;
+    }
+    .random-planet-bar-image{
+        order: 1;
+    }
+    .random-planet-bar-description{
+        order: 2
     }
 }
