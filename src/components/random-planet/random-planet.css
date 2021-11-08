@@ -1,6 +1,6 @@
 .random-planet-bar{
     background: #2d2e33;
-    opacity: 0.8;
+    opacity: 0.95;
     border: 2px solid #bbb4b4;
     border-radius: 20px;
     justify-content: center;
@@ -14,10 +14,9 @@
 }
 
 .random-planet-image{
-
-    max-width: 60%;
-    max-height: 60%;
-    border-radius: 20px 0px 0px 20px;
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 20px 20px 20px 20px;
     background-size: contain;
 }
 
@@ -42,12 +41,19 @@
         text-align: center;
     }
     .random-planet-bar-name{
+        padding-bottom: 15px;
         order: 0;
     }
     .random-planet-bar-image{
         order: 1;
     }
+    .random-planet-image{
+        max-width: 100%;
+        max-height: 100%;
+    }
+
     .random-planet-bar-description{
+        padding-top: 15px;
         order: 2
     }
 }

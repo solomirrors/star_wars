@@ -1,4 +1,13 @@
 #root{
-  background-image: linear-gradient(to right bottom, #6e7070, #575e5f, #414d4f, #2c3c41, #172c33);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50%;
+  background-attachment: fixed;
+  background-image: url("https://wallpaperaccess.com/full/729412.jpg");
+
+  /*background-image: url("https://i.pinimg.com/originals/89/e7/56/89e756699eb2f77947c636231e1085be.jpg");*/
+  /*background-image: url("https://static.wikia.nocookie.net/rustarwars/images/5/5e/Denon.png");*/
+
+  /*background-image: linear-gradient(to right bottom, #6e7070, #575e5f, #414d4f, #2c3c41, #172c33);*/
   /*background-image: linear-gradient(to right bottom, #6e7070, #657678, #5a7c83, #4d8290, #3e879f);*/
 }

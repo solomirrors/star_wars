@@ -1,6 +1,6 @@
 .random-person-bar{
     background: #2d2e33;
-    opacity: 0.8;
+    opacity: 0.95;
     border: 2px solid #bbb4b4;
     border-radius: 20px;
     justify-content: center;
@@ -41,12 +41,18 @@
         text-align: center;
     }
     .random-person-bar-name{
+        padding-bottom: 15px;
         order: 0;
     }
     .random-person-bar-image{
         order: 1;
     }
+    .random-person-image{
+        max-width: 40%;
+        max-height: 40%;
+    }
     .random-person-bar-description{
+        padding-top: 15px;
         order: 2
     }
 }

@@ -1,46 +1,93 @@
-import React from "react";
+import React, {Component} from "react";
 import {Col, Container, Image, Row} from "react-bootstrap";
 import './random-person.css'
+import SwapiService from "../../services/swapi-service";
 
-const RandomPerson = () => {
-    return(
-        <Container fluid className='p-4 pt-0'>
-            <Row className='random-person-bar p-3 m-2'>
-                <Col className='random-person-bar-image p-0' md={4}>
-                    <Image className='random-person-image' src='https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/634e5fa5-3672-4a97-961b-fd8789a1f486/deb6v5n-6036c409-9042-4ff7-90d2-435d3ee63b84.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzYzNGU1ZmE1LTM2NzItNGE5Ny05NjFiLWZkODc4OWExZjQ4NlwvZGViNnY1bi02MDM2YzQwOS05MDQyLTRmZjctOTBkMi00MzVkM2VlNjNiODQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.DvhI50I1Ri3PRm74LKoF-2N1-Qb1EsL7jj_JBNwPHUc'></Image>
-                </Col>
-                <Col className='random-person-bar-name' md={4}>
-                    <h1 className='random-person-name'>Luke Skywalker</h1>
-                </Col>
-                <Col className='random-person-bar-description' md={4}>
-                    <Row className='random-person-description'>
-                        <Col>
-                            <h4>Height: </h4>
-                        </Col>
-                        <Col>
-                            <h4>Mass: </h4>
-                        </Col>
-                    </Row>
-                    <Row className='random-person-description'>
-                        <Col>
-                            <h4>Hair color: </h4>
-                        </Col>
-                        <Col>
-                            <h4>Skin color: </h4>
-                        </Col>
-                    </Row>
-                    <Row className='random-person-description'>
-                        <Col>
-                            <h4>Birth year:</h4>
-                        </Col>
-                        <Col>
-                            <h4>Gender:</h4>
-                        </Col>
-                    </Row>
-                </Col>
-            </Row>
-        </Container>
-    );
+export default class randomPerson extends Component{
+    swapiService = new SwapiService();
+
+    state = {
+        id: null,
+        name: null,
+        height: null,
+        mass: null,
+        hairColor: null,
+        skinColor: null,
+        birthYear: null,
+        gender: null
+    }
+
+    constructor() {
+        super();
+        this.updatePerson();
+
+    }
+
+    updatePerson(){
+        const id = 5;
+        this.swapiService.
+        getPerson(id)
+            .then((person) =>{
+                this.setState({
+                    id,
+                    name: person.name,
+                    height: person.height,
+                    mass: person.mass,
+                    hairColor: person.hair_color,
+                    skinColor: person.skin_color,
+                    birthYear: person.birth_year,
+                    gender: person.gender
+                });
+            });
+    }
+
+    render() {
+        const {
+            id,
+            name,
+            height,
+            mass,
+            hairColor,
+            skinColor,
+            birthYear,
+            gender
+        } = this.state;
+
+        return(
+            <Container fluid className='p-4 pt-0'>
+                <Row className='random-person-bar p-3 m-2'>
+                    <Col className='random-person-bar-image p-0' md={4}>
+                        <h1 className='random-person-name'>{name}</h1>
+                        <Image className='random-person-image' src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`}></Image>
+                    </Col>
+                    <Col className='random-person-bar-description' md={8}>
+                        <Row className='random-person-description'>
+                            <Col>
+                                <h4>Height: {height}</h4>
+                            </Col>
+                            <Col>
+                                <h4>Mass: {mass}</h4>
+                            </Col>
+                        </Row>
+                        <Row className='random-person-description'>
+                            <Col>
+                                <h4>Hair color: {hairColor}</h4>
+                            </Col>
+                            <Col>
+                                <h4>Skin color: {skinColor}</h4>
+                            </Col>
+                        </Row>
+                        <Row className='random-person-description'>
+                            <Col>
+                                <h4>Birth year: {birthYear}</h4>
+                            </Col>
+                            <Col>
+                                <h4>Gender: {gender}</h4>
+                            </Col>
+                        </Row>
+                    </Col>
+                </Row>
+            </Container>
+        );
+    };
 };
-
-export default RandomPerson;

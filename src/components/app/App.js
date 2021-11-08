@@ -1,12 +1,12 @@
 import React, {Component} from "react";
 import Header from "../header";
+import RandomPerson from "../random-person";
+import RandomPlanet from "../random-planet";
 import ItemList from "../item-list";
 import PersonDetails from "../person-details";
-import PlanetDetails from "../planet-details";
-import RandomPlanet from "../random-planet";
-import StarshipDetails from "../starship-details";
+
 import './App.css';
-import RandomPerson from "../random-person";
+
 
 export default class App extends Component{
   render() {
@@ -19,8 +19,6 @@ export default class App extends Component{
             <ItemList/>
             <ItemList/>
             <PersonDetails/>
-            <PlanetDetails/>
-            <StarshipDetails/>
         </div>
     );
   };
