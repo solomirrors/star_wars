@@ -28,7 +28,7 @@ export default class RandomElements extends Component{
         starshipId: null,
         starshipName: null,
         starshipModel: null,
-        starshipManufacturer: null,
+        starshipConsumables: null,
         starshipMaxSpeed: null,
         starshipLength: null,
         starshipCrew: null,
@@ -43,7 +43,7 @@ export default class RandomElements extends Component{
     }
 
     upgradePerson(){
-        const personId = 15;
+        const personId = 5;
         this.swapiService.
         getPerson(personId)
             .then((person) => {
@@ -87,7 +87,7 @@ export default class RandomElements extends Component{
                     starshipId: starshipId,
                     starshipName: starship.name,
                     starshipModel: starship.model,
-                    starshipManufacturer: starship.manufacturer,
+                    starshipConsumables: starship.consumables,
                     starshipMaxSpeed: starship.max_atmosphering_speed,
                     starshipLength: starship.length,
                     starshipCrew: starship.crew,
@@ -127,7 +127,7 @@ export default class RandomElements extends Component{
             starshipId,
             starshipName,
             starshipModel,
-            starshipManufacturer,
+            starshipConsumables,
             starshipMaxSpeed,
             starshipLength,
             starshipCrew,
@@ -180,6 +180,7 @@ export default class RandomElements extends Component{
         const createRandomElements = (element) => {
             const src
                 = this.getElementSrc(element, personId);
+
             const prm = (element === 'person') ? [src, personName,
                 'Height', personHeight, 'Mass', personMass,
                 'Hair Color', personHairColor, 'Skin Color', personSkinColor,
@@ -190,7 +191,7 @@ export default class RandomElements extends Component{
                     'Diameter', planetDiameter, 'Gravity', planetGravity,
                     'Rotation Period', planetRotationPeriod, 'Orbital Period', planetOrbitalPeriod
                     ] : [src, starshipName,
-                    'Model', starshipModel, 'Manufacturer', starshipManufacturer,
+                    'Model', starshipModel, 'Consumables', starshipConsumables,
                     'Max Speed', starshipMaxSpeed, 'Length', starshipLength,
                     'Crew', starshipCrew, 'Drive Rating', starshipDriveRating
                     ]

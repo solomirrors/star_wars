@@ -1,0 +1,69 @@
+.random-elements-bar{
+    opacity: 0.95;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-image: linear-gradient(to right, #200b0b, #1e0a14, #180b19, #0f0e1d, #01101d);
+    border-radius: 240px 0px 240px 240px;
+
+}
+
+.random-elements-bar-image{
+    background-image: radial-gradient(circle, #ff0000, #000000, #000000, #420f1d, #000000);
+    border-radius: 240px;
+    width: 100%;
+    height: 100%;
+}
+
+.random-elements-image{
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    border: 4px solid #420f1d;
+    opacity: 0.8;
+    object-fit: cover;
+    background-image: url("https://starwars-visualguide.com/assets/img/characters/21.jpg");
+}
+
+.random-elements-name{
+    color: #f6ff00;
+    font-size: 72px;
+    font-family: 'Teko';
+    font-weight: 700;
+    color: #f6ff00;
+    line-height: 1;
+    text-align: center;
+}
+
+.random-elements-description{
+    font-family: Rajdhani;
+    font-weight: 400;
+    font-size: 25px;
+    color: #ffffff;
+}
+
+@media (max-width: 769px) {
+    .random-elements-bar{
+        text-align: center;
+        background-image: radial-gradient(circle, #000000, #000000, #000000, #420f1d, #000000);
+        border-radius: 50px 50px 50px 50px;
+        padding-top: 20px;
+    }
+
+    .random-elements-name{
+        margin-top: 20px;
+    }
+
+    .random-elements-bar-image{
+        background: none;
+        padding-top: 20px;
+        border-radius: 50px 50px 50px 50px;
+        order: 0;
+    }
+    .random-elements-image{
+        min-width: 200px;
+        min-height: 200px;
+        border-radius: 50px 50px 50px 50px;
+    }
+}
