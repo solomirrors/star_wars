@@ -9,34 +9,7 @@ export default class RandomElements extends Component{
     state = {
         person: {},
         planet: {},
-        starship: {},
-
-        personId: null,
-        personName: null,
-        personHeight: null,
-        personMass: null,
-        personHairColor: null,
-        personSkinColor: null,
-        personBirthYear: null,
-        personGender: null,
-
-        planetId: null,
-        planetName: null,
-        planetPopulation: null,
-        planetClimate: null,
-        planetDiameter: null,
-        planetGravity: null,
-        planetRotationPeriod: null,
-        planetOrbitalPeriod: null,
-
-        starshipId: null,
-        starshipName: null,
-        starshipModel: null,
-        starshipConsumables: null,
-        starshipMaxSpeed: null,
-        starshipLength: null,
-        starshipCrew: null,
-        starshipDriveRating: null
+        starship: {}
     }
 
     constructor() {
@@ -54,9 +27,7 @@ export default class RandomElements extends Component{
         const personId = Math.floor(Math.random() * (82-1) + 1);
         this.swapiService.
         getPerson(personId)
-            .then((person) => {
-                this.setState(this.onGetPersonLoaded)
-            });
+            .then(this.onGetPersonLoaded)
     };
 
     onGetPlanetLoaded = (planet) => {
@@ -67,9 +38,7 @@ export default class RandomElements extends Component{
         const planetId = Math.floor(Math.random() * (60-1) + 1);
         this.swapiService.
         getPlanet(planetId)
-            .then((planet) => {
-                this.setState(this.onGetPlanetLoaded)
-            });
+            .then(this.onGetPlanetLoaded)
     };
 
     onGetStarshipLoaded = (starship) => {
@@ -80,9 +49,7 @@ export default class RandomElements extends Component{
         const starshipId = Math.floor(Math.random() * (29-1) + 1);
         this.swapiService.
         getStarship(starshipId)
-            .then((starship) => {
-                this.setState(this.onGetStarshipLoaded)
-            });
+            .then(this.onGetStarshipLoaded)
     };
 
     getElementSrc(element, id){
@@ -95,32 +62,38 @@ export default class RandomElements extends Component{
 
     render() {
         const {
-            personId,
-            personName,
-            personHeight,
-            personMass,
-            personHairColor,
-            personSkinColor,
-            personBirthYear,
-            personGender,
+            person: {
+                personId,
+                personName,
+                personHeight,
+                personMass,
+                personHairColor,
+                personSkinColor,
+                personBirthYear,
+                personGender
+            },
 
-            planetId,
-            planetName,
-            planetPopulation,
-            planetClimate,
-            planetDiameter,
-            planetGravity,
-            planetRotationPeriod,
-            planetOrbitalPeriod,
+            planet: {
+                planetId,
+                planetName,
+                planetPopulation,
+                planetClimate,
+                planetDiameter,
+                planetGravity,
+                planetRotationPeriod,
+                planetOrbitalPeriod
+            },
 
-            starshipId,
-            starshipName,
-            starshipModel,
-            starshipConsumables,
-            starshipMaxSpeed,
-            starshipLength,
-            starshipCrew,
-            starshipDriveRating
+            starship: {
+                starshipId,
+                starshipName,
+                starshipModel,
+                starshipConsumables,
+                starshipMaxSpeed,
+                starshipLength,
+                starshipCrew,
+                starshipDriveRating
+            }
         } = this.state;
 
         const randomDescription = (desk_1, arg_1, desk_2, arg_2) => {
