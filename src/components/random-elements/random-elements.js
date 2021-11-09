@@ -61,9 +61,9 @@ export default class RandomElements extends Component{
     };
 
     upgradePlanet(){
-        const planetId = 15;
+        const planetId = 4;
         this.swapiService.
-        getPerson(planetId)
+        getPlanet(planetId)
             .then((planet) => {
                 this.setState({
                     planetId: planetId,
@@ -81,7 +81,7 @@ export default class RandomElements extends Component{
     upgradeStarship(){
         const starshipId = 15;
         this.swapiService.
-        getPerson(starshipId)
+        getStarship(starshipId)
             .then((starship) => {
                 this.setState({
                     starshipId: starshipId,
@@ -148,13 +148,14 @@ export default class RandomElements extends Component{
         };
 
         const randomElements = (
-            id, src, name,
+            src, name,
             desk_1, arg_1,
             desk_2, arg_2,
             desk_3, arg_3,
             desk_4, arg_4,
             desk_5, arg_5,
-            desk_6, arg_6) => {
+            desk_6, arg_6
+            ) => {
             return(
                 <Container fluid className='p-4 pt-0'>
                     <Row className='random-elements-bar m-2'>
@@ -176,11 +177,37 @@ export default class RandomElements extends Component{
             );
         };
 
+        const createRandomElements = (element) => {
+            const src
+                = this.getElementSrc(element, personId);
+            const prm = (element === 'person') ? [src, personName,
+                'Height', personHeight, 'Mass', personMass,
+                'Hair Color', personHairColor, 'Skin Color', personSkinColor,
+                'Birth Year', personBirthYear, 'Gender', personGender
+            ] :
+                (element === 'planet') ? [src, planetName,
+                    'Population', planetPopulation, 'Climate', planetClimate,
+                    'Diameter', planetDiameter, 'Gravity', planetGravity,
+                    'Rotation Period', planetRotationPeriod, 'Orbital Period', planetOrbitalPeriod
+                    ] : [src, starshipName,
+                    'Model', starshipModel, 'Manufacturer', starshipManufacturer,
+                    'Max Speed', starshipMaxSpeed, 'Length', starshipLength,
+                    'Crew', starshipCrew, 'Drive Rating', starshipDriveRating
+                    ]
+
+            return (
+                <React.Fragment>
+                    {randomElements(prm[0], prm[1], prm[2], prm[3], prm[4], prm[5], prm[6], prm[7], prm[8], prm[9], prm[10], prm[11], prm[12], prm[13])}
+                </React.Fragment>
+            );
+        };
+
         return(
-            <div>
-                {randomElements(personId, this.getElementSrc('person', personId), personName, personHeight, personMass, personHairColor, personSkinColor, personBirthYear, personGender)}
-                {randomElements(planetId, this.getElementSrc('planet', planetId), planetName, planetPopulation, planetClimate, planetDiameter, planetGravity, planetRotationPeriod, planetOrbitalPeriod)}
-            </div>
+            <React.Fragment>
+                {createRandomElements('person')}
+                {createRandomElements('planet')}
+                {createRandomElements('starship')}
+            </React.Fragment>
         )
     }
 }
