@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Col, Container, Image, Row} from "react-bootstrap";
-import './random-planet.css'
 import SwapiService from "../../services/swapi-service";
+import './random-planet.css'
 
 export default class RandomPlanet extends Component{
     swapiService = new SwapiService();
@@ -23,7 +23,7 @@ export default class RandomPlanet extends Component{
     }
 
     updatePlanet(){
-        const id = 6;
+        const id = 15;
         this.swapiService.
         getPlanet(id)
             .then((planet) =>{
@@ -52,40 +52,34 @@ export default class RandomPlanet extends Component{
             orbitalPeriod
         } = this.state;
 
+        const randomPlanetDescription = (desk_1, arg_1, desk_2, arg_2) => {
+            return(
+                <Row>
+                    <Col sm={6} md={6} className='p-0'>
+                        <h4 className='random-planet-description'>{desk_1}: {arg_1}</h4>
+                    </Col>
+                    <Col sm={6} md={6} className='p-0'>
+                        <h4 className='random-planet-description'>{desk_2}: {arg_2}</h4>
+                    </Col>
+                </Row>
+            )
+        };
+
         return(
             <Container fluid className='p-4 pt-0'>
-                <Row className='random-planet-bar p-3 m-2'>
-                    <Col className='random-planet-bar-description' md={5}>
-                        <Row className='random-planet-description'>
-                            <Col>
-                                <h4>Population: {population}</h4>
-                            </Col>
-                            <Col>
-                                <h4>Climate: {climate}</h4>
-                            </Col>
-                        </Row>
-                        <Row className='random-planet-description'>
-                            <Col>
-                                <h4>Diameter: {diameter}</h4>
-                            </Col>
-                            <Col>
-                                <h4>Gravity: {gravity}</h4>
-                            </Col>
-                        </Row>
-                        <Row className='random-planet-description'>
-                            <Col>
-                                <h4>Rotation Period: {rotationPeriod}</h4>
-                            </Col>
-                            <Col>
-                                <h4>Orbital Period: {orbitalPeriod}</h4>
-                            </Col>
-                        </Row>
+                <Row className='random-person-bar m-2'>
+                    <Col md={4} className='random-person-bar-image p-0'>
+                        <Image className='random-person-image' src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}/>
                     </Col>
-                    <Col className='random-planet-bar-name' md={3}>
-                        <h1 className='random-planet-name'>{name}</h1>
-                    </Col>
-                    <Col className='random-planet-bar-image p-0' md={4}>
-                        <Image className='random-planet-image' src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}></Image>
+                    <Col className='p-0' md={8}>
+                        <Col className='random-planet-bar-name p-0' md={12}>
+                            <h1 className='random-person-name'>{name}</h1>
+                        </Col>
+                        <Col className='p-0' md={12}>
+                            {randomPlanetDescription('Population', population, 'Climate', climate)}
+                            {randomPlanetDescription('Diameter', diameter, 'Gravity', gravity)}
+                            {randomPlanetDescription('Rotation Period', rotationPeriod, 'Orbital Period', orbitalPeriod)}
+                        </Col>
                     </Col>
                 </Row>
             </Container>

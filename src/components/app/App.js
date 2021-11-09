@@ -6,6 +6,7 @@ import ItemList from "../item-list";
 import PersonDetails from "../person-details";
 
 import './App.css';
+import RandomElements from "../random-elements";
 
 
 export default class App extends Component{
@@ -15,6 +16,7 @@ export default class App extends Component{
             <Header/>
             <RandomPerson/>
             <RandomPlanet/>
+            <RandomElements/>
             <ItemList/>
             <ItemList/>
             <ItemList/>
