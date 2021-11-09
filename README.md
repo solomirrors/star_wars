@@ -16,7 +16,7 @@
 
 # Project appearance:
 
-<img src="https://i.imgur.com/woyMFs0.jpg"/>
-<img src="https://i.imgur.com/UaEkiem.jpg"/>
+<img src="https://i.imgur.com/uJQUJET.jpg"/>
+<img src="https://i.imgur.com/NtxBv5a.jpg"/>
 
 # May the force be with you!
