@@ -7,6 +7,10 @@ export default class RandomElements extends Component{
     swapiService = new SwapiService();
 
     state = {
+        person: {},
+        planet: {},
+        starship: {},
+
         personId: null,
         personName: null,
         personHeight: null,
@@ -42,57 +46,42 @@ export default class RandomElements extends Component{
         this.upgradeStarship();
     }
 
+    onGetPersonLoaded = (person) => {
+        this.setState({person});
+    }
+
     upgradePerson(){
-        const personId = 5;
+        const personId = Math.floor(Math.random() * (82-1) + 1);
         this.swapiService.
         getPerson(personId)
             .then((person) => {
-                this.setState({
-                    personId: personId,
-                    personName: person.name,
-                    personHeight: person.height,
-                    personMass: person.mass,
-                    personHairColor: person.hair_color,
-                    personSkinColor: person.skin_color,
-                    personBirthYear: person.birth_year,
-                    personGender: person.gender
-                });
+                this.setState(this.onGetPersonLoaded)
             });
     };
 
+    onGetPlanetLoaded = (planet) => {
+        this.setState({planet});
+    }
+
     upgradePlanet(){
-        const planetId = 4;
+        const planetId = Math.floor(Math.random() * (60-1) + 1);
         this.swapiService.
         getPlanet(planetId)
             .then((planet) => {
-                this.setState({
-                    planetId: planetId,
-                    planetName: planet.name,
-                    planetPopulation: planet.population,
-                    planetClimate: planet.climate,
-                    planetDiameter: planet.diameter,
-                    planetGravity: planet.gravity,
-                    planetRotationPeriod: planet.rotation_period,
-                    planetOrbitalPeriod: planet.orbital_period,
-                });
+                this.setState(this.onGetPlanetLoaded)
             });
     };
 
+    onGetStarshipLoaded = (starship) => {
+        this.setState({starship});
+    }
+
     upgradeStarship(){
-        const starshipId = 15;
+        const starshipId = Math.floor(Math.random() * (29-1) + 1);
         this.swapiService.
         getStarship(starshipId)
             .then((starship) => {
-                this.setState({
-                    starshipId: starshipId,
-                    starshipName: starship.name,
-                    starshipModel: starship.model,
-                    starshipConsumables: starship.consumables,
-                    starshipMaxSpeed: starship.max_atmosphering_speed,
-                    starshipLength: starship.length,
-                    starshipCrew: starship.crew,
-                    starshipDriveRating: starship.hyperdrive_rating
-                });
+                this.setState(this.onGetStarshipLoaded)
             });
     };
 
@@ -177,9 +166,9 @@ export default class RandomElements extends Component{
             );
         };
 
-        const createRandomElements = (element) => {
+        const createRandomElements = (element, id) => {
             const src
-                = this.getElementSrc(element, personId);
+                = this.getElementSrc(element, id);
 
             const prm = (element === 'person') ? [src, personName,
                 'Height', personHeight, 'Mass', personMass,
@@ -205,9 +194,9 @@ export default class RandomElements extends Component{
 
         return(
             <React.Fragment>
-                {createRandomElements('person')}
-                {createRandomElements('planet')}
-                {createRandomElements('starship')}
+                {createRandomElements('person', personId)}
+                {createRandomElements('planet', planetId)}
+                {createRandomElements('starship', starshipId)}
             </React.Fragment>
         )
     }
