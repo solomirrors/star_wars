@@ -5,228 +5,91 @@ import {Col, Container, Image, Row} from "react-bootstrap";
 import Spinner from "../spinner";
 
 
-const randomElementsBuilder = (src, {props}) => {
-    const {
-        starshipId,
-        starshipName,
-        starshipModel,
-        starshipConsumables,
-        starshipMaxSpeed,
-        starshipLength,
-        starshipCrew,
-        starshipDriveRating
-    } = props
-
-    return (
-        <Container fluid className='p-4 pt-0'>
-            <Row className='random-elements-bar m-2'>
-                <Col md={4} className='random-elements-bar-image p-0'>
-                    <Image className='random-elements-image' src={`${src}${starshipId}.jpg`}/>
-                </Col>
-                <Col className='p-0' md={8}>
-                    <Col className='random-elements-bar-name p-0' md={12}>
-                        <h1 className='random-elements-name'>{starshipName}</h1>
-                    </Col>
-                    <Col className='p-0' md={12}>
-                        <Row>
-                            <Col sm={6} md={6} className='p-0'>
-                                <h4 className='random-elements-description'>{'Test 1'}: {starshipModel}</h4>
-                            </Col>
-                            <Col sm={6} md={6} className='p-0'>
-                                <h4 className='random-elements-description'>{'Test 2'}: {starshipConsumables}</h4>
-                            </Col>
-                        </Row>
-                    </Col>
-                </Col>
-            </Row>
-        </Container>
-    );
-};
-
-export default randomElementsBuilder();
-
-const randomElementsGetDescription = () => {
-    return(
-        <React.Fragment>
-
-        </React.Fragment>
-    )
-}
-
-
-
-
-
-class RandomElements extends Component{
+export default class randomElements extends Component {
     swapiService = new SwapiService();
-    _getPathPictures = 'https://starwars-visualguide.com/assets/img/';
 
     state = {
-        person: {},
-        planet: {},
-        starship: {},
-        loadingPerson: true,
-        loadingPlanet: true,
-        loadingStarship: true
+        randomData: {},
+        loading: true
     }
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+        this.onUpgradeRandomElements(this.props.create, this.props.randomMin, this.props.randomMax);
+    }
+
+    onGetRandomElementsLoaded = (elements) => {
+        this.setState({randomData: elements, loading: false});
+    }
+
+    onSetRandomElementsValue = (min, max) =>{
+        return (Math.floor(Math.random() * (max - min) + min));
+    }
+
+    onUpgradeRandomElements (elements, min, max) {
+        this.swapiService.
+        getSelectDataToDisplay(elements,
+            this.onSetRandomElementsValue(min, max))
+            .then(this.onGetRandomElementsLoaded);
     }
 
     render() {
-        const {
-            person,
-            planet,
-            starship,
-            loadingPerson,
-            loadingPlanet,
-            loadingStarship
-        } = this.state;
-
-        const propertyRandomInternals = (props_1, arg_1, props_2, arg_2) => {
-            return(
-                <React.Fragment>
-                    <Row>
-                        <Col sm={6} md={6} className='p-0'>
-                            <h4 className='random-elements-description'>{props_1}: {arg_1}</h4>
-                        </Col>
-                        <Col sm={6} md={6} className='p-0'>
-                            <h4 className='random-elements-description'>{props_2}: {arg_2}</h4>
-                        </Col>
-                    </Row>
-                </React.Fragment>
-            )
-        }
-
-        const propertyRandomDescription = (name, props_1, arg_1, props_2, arg_2, props_3, arg_3, props_4, arg_4, props_5, arg_5, props_6, arg_6) => {
-            return(
-                <React.Fragment>
-                    <Col className='p-0' md={8}>
-                        <Col className='random-elements-bar-name p-0' md={12}>
-                            <h1 className='random-elements-name'>{name}</h1>
-                        </Col>
-                        <Col className='p-0' md={12}>
-                            {propertyRandomInternals(props_1, arg_1, props_2, arg_2)}
-                            {propertyRandomInternals(props_3, arg_3, props_4, arg_4)}
-                            {propertyRandomInternals(props_5, arg_5, props_6, arg_6)}
-                        </Col>
-                    </Col>
-                </React.Fragment>
-            );
-        };
-
-        const propertyRandomImage = (element, id) =>{
-            const src = (element === 'person') ? `${this._getPathPictures}characters/${id}.jpg`
-                : (element === 'planet') ? `${this._getPathPictures}planets/${id}.jpg`
-                    : `${this._getPathPictures}starships/${id}.jpg`
-            return(
-                <React.Fragment>
-                    <Col md={4} className='random-elements-bar-image p-0'>
-                        <Image className='random-elements-image' src={src}/>
-                    </Col>
-                </React.Fragment>
-            );
-        };
-
-
-
-        const propertyRandomElement = (element, id, name, props_1, arg_1, props_2, arg_2, props_3, arg_3, props_4, arg_4, props_5, arg_5, props_6, arg_6) => {
-            return(
-                <React.Fragment>
-                    <Container fluid className='p-4 pt-0'>
-                        <Row className='random-elements-bar m-2'>
-                            {propertyRandomImage(element, id)}
-                            {propertyRandomDescription(
-                                name, props_1, arg_1, props_2, arg_2, props_3, arg_3,
-                                props_4, arg_4, props_5, arg_5, props_6, arg_6)}
-                        </Row>
-                    </Container>
-                </React.Fragment>
-            );
-        };
-
-        const PersonView = ({person}) => {
-            const {
-                personId,
-                personName,
-                personHeight,
-                personMass,
-                personHairColor,
-                personSkinColor,
-                personBirthYear,
-                personGender
-            } = person
-            return(
-                <React.Fragment>
-                    {propertyRandomElement('person', personId, personName,
-                        'Height', personHeight,
-                        'Mass', personMass,
-                        'Hair Color', personHairColor,
-                        'Skin Color', personSkinColor,
-                        'Birth Year', personBirthYear,
-                        'Gender', personGender
-                    )}
-                </React.Fragment>
-            )
-        }
-
-        const PlanetView = ({ planet }) => {
-            const {
-                planetId,
-                planetName,
-                planetPopulation,
-                planetClimate,
-                planetDiameter,
-                planetGravity,
-                planetRotationPeriod,
-                planetOrbitalPeriod
-            } = planet
-            return(
-                <React.Fragment>
-                    {propertyRandomElement('planet', planetId, planetName,
-                        'Population', planetPopulation,
-                        'Climate', planetClimate,
-                        'Diameter', planetDiameter,
-                        'Gravity', planetGravity,
-                        'Rotation Period', planetRotationPeriod,
-                        'Orbital Period', planetOrbitalPeriod
-                    )}
-                </React.Fragment>
-            )
-        }
-
-        const StarshipView = ({ starship }) => {
-            const {
-                starshipId,
-                starshipName,
-                starshipModel,
-                starshipConsumables,
-                starshipMaxSpeed,
-                starshipLength,
-                starshipCrew,
-                starshipDriveRating
-            } = starship
-            return(
-                <React.Fragment>
-                    {propertyRandomElement('starship', starshipId, starshipName,
-                        'Model', starshipModel,
-                        'Consumables', starshipConsumables,
-                        'Max Speed', starshipMaxSpeed,
-                        'Length', starshipLength,
-                        'Crew', starshipCrew,
-                        'Drive Rating', starshipDriveRating
-                    )}
-                </React.Fragment>
-            )
-        }
+        const {randomData, loading} = this.state;
+        const data = Object.values(randomData);
+        const spinner = loading ? <Spinner/> : null;
+        const content = !loading? <RandomElementsBuilder data = {data}/> : null
 
         return(
-            <React.Fragment>
-                <PersonView person={person}/>
-                <PlanetView planet={planet}/>
-                <StarshipView starship={starship}/>
-            </React.Fragment>
+            <Container fluid className='p-4 pt-0'>
+                <Row className='random-elements-bar m-2'>
+                    {spinner}
+                    {content}
+                </Row>
+            </Container>
+        );
+    };
+};
+
+const RandomElementsBuilder = ({data}) => {
+    const [
+        ,name, url,
+        desc_1, value_1,
+        desc_2, value_2,
+        desc_3, value_3,
+        desc_4, value_4,
+        desc_5, value_5,
+        desc_6, value_6
+    ] = data
+
+    const describe = (d_1, v_1, d_2, v_2) => {
+        return(
+            <Row>
+                <Col sm={6} md={6} className='p-0'>
+                    <h4 className='random-elements-description'>{d_1}: {v_1}</h4>
+                </Col>
+                <Col sm={6} md={6} className='p-0'>
+                    <h4 className='random-elements-description'>{d_2}: {v_2}</h4>
+                </Col>
+            </Row>
         )
     }
-}
+
+    return(
+        <React.Fragment>
+            <Col md={4} className='random-elements-bar-image p-0'>
+                <Image className='random-elements-image' src={url}
+                       onError={(e) => e.target.src = 'https://cdn.dribbble.com/users/841405/screenshots/2309412/6.png'}/>
+            </Col>
+            <Col className='p-0' md={8}>
+                <Col className='random-elements-bar-name p-0' md={12}>
+                    <h1 className='random-elements-name'>{name}</h1>
+                </Col>
+                <Col className='p-0' md={12}>
+                    {describe(desc_1, value_1, desc_2, value_2)}
+                    {describe(desc_3, value_3, desc_4, value_4)}
+                    {describe(desc_5, value_5, desc_6, value_6)}
+                </Col>
+            </Col>
+        </React.Fragment>
+    )
+};
