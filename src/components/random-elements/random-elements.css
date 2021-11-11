@@ -6,7 +6,7 @@
     text-align: center;
     background-image: linear-gradient(to right, #200b0b, #1e0a14, #180b19, #0f0e1d, #01101d);
     border-radius: 240px 0px 240px 240px;
-
+    min-height: 200px;
 }
 
 .random-elements-bar-image{
@@ -23,7 +23,6 @@
     border: 4px solid #420f1d;
     opacity: 0.8;
     object-fit: cover;
-    background-image: url("https://starwars-visualguide.com/assets/img/characters/21.jpg");
 }
 
 .random-elements-name{
