@@ -42,6 +42,14 @@
     color: #ffffff;
 }
 
+.error-message{
+    font-family: Rajdhani;
+    font-weight: 400;
+    font-size: 25px;
+    color: #ffffff;
+    margin-top: 20px;
+}
+
 @media (max-width: 769px) {
     .random-elements-bar{
         text-align: center;

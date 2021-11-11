@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import SwapiService from "../../services/swapi-service";
-import './random-elements.css'
 import {Col, Container, Image, Row} from "react-bootstrap";
 import Spinner from "../spinner";
+import './random-elements.css'
 
 
 export default class randomElements extends Component {
@@ -10,7 +10,8 @@ export default class randomElements extends Component {
 
     state = {
         randomData: {},
-        loading: true
+        loading: true,
+        error: false
     }
 
     constructor(props) {
@@ -26,28 +27,53 @@ export default class randomElements extends Component {
         return (Math.floor(Math.random() * (max - min) + min));
     }
 
+    onGetRandomElementsError = (error) => {
+        this.setState({
+            error: true,
+            loading: false
+        });
+    };
+
     onUpgradeRandomElements (elements, min, max) {
         this.swapiService.
         getSelectDataToDisplay(elements,
             this.onSetRandomElementsValue(min, max))
-            .then(this.onGetRandomElementsLoaded);
+            .then(this.onGetRandomElementsLoaded)
+            .catch(this.onGetRandomElementsError);
     }
 
     render() {
-        const {randomData, loading} = this.state;
+        const {randomData, loading, error} = this.state;
         const data = Object.values(randomData);
+
+        const hasData = !(loading || error);
+
+        const errorMessage = error ? <ErrorIndicator/> : null
         const spinner = loading ? <Spinner/> : null;
-        const content = !loading? <RandomElementsBuilder data = {data}/> : null
+        const content = hasData ? <RandomElementsBuilder data = {data}/> : null
+
 
         return(
             <Container fluid className='p-4 pt-0'>
                 <Row className='random-elements-bar m-2'>
+                    {errorMessage}
                     {spinner}
                     {content}
                 </Row>
             </Container>
         );
     };
+};
+
+const ErrorIndicator = () => {
+    return(
+        <React.Fragment>
+            <div>
+                <h6 className='error-message'>This object has gone to the dark side and is currently unavailable to our radars, we are very sorry:</h6>
+                <h6 className='error-message'>We will try to return it as soon as possible!</h6>
+            </div>
+        </React.Fragment>
+    );
 };
 
 const RandomElementsBuilder = ({data}) => {
