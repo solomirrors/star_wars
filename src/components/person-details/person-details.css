@@ -1,0 +1,8 @@
+.person-details-image{
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    border: 4px solid #420f1d;
+    opacity: 0.8;
+    object-fit: cover;
+}

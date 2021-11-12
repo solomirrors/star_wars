@@ -95,11 +95,11 @@ const RandomElementsBuilder = ({data}) => {
 
     const describe = (d_1, v_1, d_2, v_2) => {
         return(
-            <Row>
-                <Col sm={6} md={6} className='p-0'>
+            <Row className='row-cols-2'>
+                <Col className='p-0'>
                     <h4 className='random-elements-description'>{d_1}: {v_1}</h4>
                 </Col>
-                <Col sm={6} md={6} className='p-0'>
+                <Col className='p-0'>
                     <h4 className='random-elements-description'>{d_2}: {v_2}</h4>
                 </Col>
             </Row>
@@ -108,7 +108,7 @@ const RandomElementsBuilder = ({data}) => {
 
     return(
         <React.Fragment>
-            <Col md={4} className='random-elements-bar-image p-0'>
+            <Col className='random-elements-bar-image p-0'>
                 <Image className='random-elements-image' src={url}
                        onError={(e) => e.target.src = 'https://cdn.dribbble.com/users/841405/screenshots/2309412/6.png'}/>
             </Col>
