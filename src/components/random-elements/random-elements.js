@@ -20,6 +20,11 @@ export default class randomElements extends Component {
             = setInterval(this.onUpgradeRandomElements, 8000, this.props.create, this.props.randomMin, this.props.randomMax);
     }
 
+    componentWillUnmount() {
+        clearInterval(this.interval);
+        clearTimeout(this.timeout);
+    }
+
     onGetRandomElementsLoaded = (elements) => {
         this.setState({randomData: elements, loading: false});
     }
@@ -64,13 +69,6 @@ export default class randomElements extends Component {
             </Container>
         );
     };
-
-
-
-    componentWillUnmount() {
-        clearInterval(this.interval);
-        clearTimeout(this.timeout);
-    }
 };
 
 const ErrorIndicator = () => {
