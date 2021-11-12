@@ -12,13 +12,13 @@ const Header = () => {
                 <Col md={9}>
                     <Row>
                         <Col className='header-link-panel p-0' sm={4}>
-                            <a className='header-link' href='#'>People</a>
+                            <a className='header-link' href='https://github.com/solomirrors/star_wars'>People</a>
                         </Col>
                         <Col className='header-link-panel p-0' sm={4}>
-                            <a className='header-link' href='#'>Planets</a>
+                            <a className='header-link' href='https://github.com/solomirrors/star_wars'>Planets</a>
                         </Col>
                         <Col className='header-link-panel p-0' sm={4}>
-                            <a className='header-link' href='#'>Starships</a>
+                            <a className='header-link' href='https://github.com/solomirrors/star_wars'>Starships</a>
                         </Col>
                     </Row>
                 </Col>

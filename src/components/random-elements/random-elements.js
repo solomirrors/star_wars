@@ -4,7 +4,6 @@ import {Col, Container, Image, Row} from "react-bootstrap";
 import Spinner from "../spinner";
 import './random-elements.css'
 
-
 export default class randomElements extends Component {
     swapiService = new SwapiService();
 
@@ -14,9 +13,11 @@ export default class randomElements extends Component {
         error: false
     }
 
-    constructor(props) {
-        super(props);
-        this.onUpgradeRandomElements(this.props.create, this.props.randomMin, this.props.randomMax);
+    componentDidMount(props) {
+        this.timeout =
+            setTimeout(this.onUpgradeRandomElements, 500, this.props.create, this.props.randomMin, this.props.randomMax);
+        this.interval
+            = setInterval(this.onUpgradeRandomElements, 8000, this.props.create, this.props.randomMin, this.props.randomMax);
     }
 
     onGetRandomElementsLoaded = (elements) => {
@@ -34,9 +35,9 @@ export default class randomElements extends Component {
         });
     };
 
-    onUpgradeRandomElements (elements, min, max) {
-        this.swapiService.
-        getSelectDataToDisplay(elements,
+    onUpgradeRandomElements = (elements, min, max) => {
+        this.swapiService
+            .getSelectDataToDisplay(elements,
             this.onSetRandomElementsValue(min, max))
             .then(this.onGetRandomElementsLoaded)
             .catch(this.onGetRandomElementsError);
@@ -63,16 +64,21 @@ export default class randomElements extends Component {
             </Container>
         );
     };
+
+
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
+        clearTimeout(this.timeout);
+    }
 };
 
 const ErrorIndicator = () => {
     return(
-        <React.Fragment>
-            <div>
-                <h6 className='error-message'>This object has gone to the dark side and is currently unavailable to our radars, we are very sorry:</h6>
-                <h6 className='error-message'>We will try to return it as soon as possible!</h6>
-            </div>
-        </React.Fragment>
+        <div>
+            <h6 className='error-message'>This object has gone to the dark side and is currently unavailable to our radars, we are very sorry :(</h6>
+            <h6 className='error-message'>We will try to return it as soon as possible!</h6>
+        </div>
     );
 };
 

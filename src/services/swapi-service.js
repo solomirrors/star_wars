@@ -58,11 +58,11 @@ export default class SwapiService {
             return this.getStarship(id)
     }
 
-    _transformPerson(person) {
+    _transformPerson = (person) => {
         return {
-            personId: this.regExIdConvert(person),
-            personName: person.name,
-            personUrl: `https://starwars-visualguide.com/assets/img/characters/${this.regExIdConvert(person)}.jpg`,
+            Id: this.regExIdConvert(person),
+            Name: person.name,
+            Url: `https://starwars-visualguide.com/assets/img/characters/${this.regExIdConvert(person)}.jpg`,
             desc_1: 'Height',
             personHeight: person.height,
             desc_2: 'Mass',
@@ -78,11 +78,11 @@ export default class SwapiService {
         }
     }
 
-    _transformPlanet(planet) {
+    _transformPlanet = (planet) => {
         return {
-            planetId: this.regExIdConvert(planet),
-            planetName: planet.name,
-            planetUrl: `https://starwars-visualguide.com/assets/img/planets/${this.regExIdConvert(planet)}.jpg`,
+            Id: this.regExIdConvert(planet),
+            Name: planet.name,
+            Url: `https://starwars-visualguide.com/assets/img/planets/${this.regExIdConvert(planet)}.jpg`,
             desc_1: 'Population',
             planetPopulation: planet.population,
             desc_2: 'Climate',
@@ -98,11 +98,11 @@ export default class SwapiService {
         }
     }
 
-    _transformStarship(starship) {
+    _transformStarship = (starship) => {
         return {
-            starshipId: this.regExIdConvert(starship),
-            starshipName: starship.name,
-            starshipUrl: `https://starwars-visualguide.com/assets/img/starships/${this.regExIdConvert(starship)}.jpg`,
+            Id: this.regExIdConvert(starship),
+            Name: starship.name,
+            Url: `https://starwars-visualguide.com/assets/img/starships/${this.regExIdConvert(starship)}.jpg`,
             desc_1: 'Model',
             starshipModel: starship.model,
             desc_2: 'Consumables',
