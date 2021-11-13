@@ -1,8 +1,9 @@
 import React, {Component} from "react";
-import ItemList from "../item-list";
-import PersonDetails from "../person-details";
-import SwapiService from "../../services/swapi-service";
 import {Col, Container, Row} from "react-bootstrap";
+import ItemList from "../item-list";
+import ItemDetails from "../item-details";
+import SwapiService from "../../services/swapi-service";
+import ErrorBoundry from "../error-boundry";
 
 const PeopleMarkup = ({markLeft, markRight}) => {
     return(
@@ -27,12 +28,6 @@ export default class PeoplePage extends Component{
         hasError: false
     }
 
-    componentDidCatch(error, errorInfo) {
-        this.setState({
-            hasError: true
-        })
-    }
-
     onPersonSelected = (selectedPerson) => {
         this.setState({selectedPerson});
     }
@@ -45,16 +40,22 @@ export default class PeoplePage extends Component{
             <ItemList
                 onItemSelected = {this.onPersonSelected}
                 getData = {this.swapiService.getAllPeople}
-                renderItem = {(item) => item.Name}
-            />
+            >
+                {(i) => (
+                  `${i.Name}, (${i.personGender})`
+                )}
+            </ItemList>
         )
 
         const personDetails = (
-            <PersonDetails personId={this.state.selectedPerson}/>
+            <ItemDetails personId={this.state.selectedPerson}/>
         )
 
         return(
-            <PeopleMarkup markLeft={itemList} markRight={personDetails}/>
+            <ErrorBoundry>
+                <PeopleMarkup markLeft={itemList} markRight={personDetails}/>
+            </ErrorBoundry>
+
         )
     }
 }

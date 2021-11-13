@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import Header from "../header";
 import RandomElements from "../random-elements";
 import ItemList from "../item-list";
-import PersonDetails from "../person-details";
+import ItemDetails from "../item-details";
 import {Col, Container, Image, Row} from "react-bootstrap";
 import './App.css';
 import SwapiService from "../../services/swapi-service";
@@ -32,6 +32,22 @@ export default class App extends Component{
             return <AppErrorIndicator/>
         }
 
+        const {getPerson, getStarship} = this.swapiService;
+
+        const personDetails = (
+            <ItemDetails
+                itemId = {11}
+                getData = {getPerson}
+            />
+        )
+
+        const starshipDetails = (
+            <ItemDetails
+                itemId = {5}
+                getData = {getStarship}
+            />
+        )
+
         return (
             <React.Fragment>
                 <Header/>
@@ -50,25 +66,13 @@ export default class App extends Component{
                     randomMin={1}
                     randomMax={36}
                 />
-                <PeoplePage/>
-                <ItemList
-                    onItemSelected = {this.onPersonSelected}
-                    getData = {this.swapiService.getAllPeople}
-                    renderItem = {({Name, desc_5, personBirthYear,desc_6, personGender}) =>
-                        <React.Fragment>
-                            {Name}
-                            <div>
-                                <span>{desc_5}:{personBirthYear}</span>
-                            </div>
-                            <div>
-                                <span>{desc_6}:{personGender}</span>
-                            </div>
-                        </React.Fragment>
-                    }
-                />
-                <PersonDetails
-                    personId = {this.state.selectedPerson}
-                />
+
+                <Row>
+                    <Col>{personDetails}</Col>
+                    <Col>{starshipDetails}</Col>
+                </Row>
+
+
             </React.Fragment>
     );
   };

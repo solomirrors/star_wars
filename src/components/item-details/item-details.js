@@ -1,48 +1,48 @@
 import React, {Component} from "react";
 import {Col, Container, Image, Row} from "react-bootstrap";
-import './person-details.css'
+import './item-details.css'
 import SwapiService from "../../services/swapi-service";
 import Spinner from "../spinner";
 
-export default class PersonDetails extends Component{
+export default class ItemDetails extends Component{
     swapiService = new SwapiService();
 
     state = {
-        person: null,
+        item: null,
         loading: true
     };
 
     componentDidMount() {
-        this.updatePerson();
+        this.updateItem();
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this.props.personId !== prevProps.personId){
-            this.updatePerson();
+        if (this.props.itemId !== prevProps.itemId){
+            this.updateitem();
         }
     }
 
-    updatePerson() {
-        const { personId } = this.props;
-        if (!personId){
+    updateItem() {
+        const { itemId, getData } = this.props;
+        if (!itemId){
             return;
         }
-        this.swapiService
-            .getPerson(personId)
-            .then((person) =>{
-                this.setState({person});
-            });
+        getData(itemId)
+            .then((item) => {
+            this.setState({item})
+        });
+
         this.setState({loading : false})
     }
 
     render() {
-        if (!this.state.person){
+        if (!this.state.item){
             return (
-                <span>Select a person from a list</span>
+                <span>Select a item from a list</span>
             )
         }
 
-        const {Id, Name, Url, personHeight, personMass, personHairColor} = this.state.person
+        const {Id, Name, Url, personHeight, personMass, personHairColor} = this.state.item
 
         const {loading} = this.state;
 
@@ -50,7 +50,7 @@ export default class PersonDetails extends Component{
             return(
                 <React.Fragment>
                     <Col className='col-auto'>
-                        <Image className='person-details-image' src={Url}/>
+                        <Image className='item-details-image' src={Url}/>
                     </Col>
                     <Col md={8}>
                         <Row className='row-cols-2'>
