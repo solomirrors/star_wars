@@ -1,22 +1,25 @@
 import React, {Component} from "react";
 import Header from "../header";
-import './App.css';
 import RandomElements from "../random-elements";
 import ItemList from "../item-list";
 import PersonDetails from "../person-details";
 import {Col, Container, Image, Row} from "react-bootstrap";
+import './App.css';
+import SwapiService from "../../services/swapi-service";
 
 export default class App extends Component{
+    swapiService = new SwapiService();
+
     state = {
         selectedPerson: 8,
-        hasError: true
+        hasError: false
     }
+
 
     onPersonSelected = (id) => {
         this.setState({
             selectedPerson: id
         });
-        console.log(id)
     };
 
     componentDidCatch(error, errorInfo) {
@@ -43,8 +46,21 @@ export default class App extends Component{
                     create='starship'
                     randomMin={1}
                     randomMax={36}/>
-                <ItemList onItemSelected = {this.onPersonSelected}/>
-                <PersonDetails personId = {this.state.selectedPerson}/>
+                <ItemList
+                    onItemSelected = {this.onPersonSelected}
+                    getData = {this.swapiService.getAllPeople}
+                />
+                <ItemList
+                    onItemSelected = {this.onPersonSelected}
+                    getData = {this.swapiService.getAllPlanets}
+                />
+                <ItemList
+                    onItemSelected = {this.onPersonSelected}
+                    getData = {this.swapiService.getAllStarships}
+                />
+                <PersonDetails
+                    personId = {this.state.selectedPerson}
+                />
             </React.Fragment>
     );
   };
@@ -63,5 +79,5 @@ const AppErrorIndicator = () => {
                 </Col>
             </Row>
         </Container>
-    )
-}
+    );
+};

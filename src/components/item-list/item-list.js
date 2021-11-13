@@ -4,53 +4,51 @@ import './item-list.css'
 import SwapiService from "../../services/swapi-service";
 import Spinner from "../spinner";
 
-export default class ItemList extends Component{
-    swapiService = new SwapiService();
+export default class ItemList extends Component {
 
     state = {
-        peopleList: null
+        dataList: null
     };
 
     componentDidMount() {
-        this.swapiService
-            .getAllPeople()
-            .then((peopleList) => {
+        const { getData } = this.props;
+
+        getData()
+            .then((dataList) => {
                 this.setState({
-                    peopleList
+                    dataList
                 });
             });
     };
 
-    renderItems(arr) {
+    renderItemList(arr) {
         if (arr){
             return arr.map(({Id, Name}) => {
-                return (
-
+                return(
                     <li
-                        className='item-list-item'
                         key={Id}
-                        onClick={() => this.props.onItemSelected(Id)}>
-                    {Name}
-                </li>
-
+                        onClick={() => this.props.onItemSelected(Id)}
+                    >
+                        {Name}
+                    </li>
                 );
             });
         };
     };
 
     render() {
-        const { peopleList } = this.state;
-        const items = this.renderItems(peopleList);
+        const {dataList} = this.state;
+        const renderItem = this.renderItemList(dataList);
 
-        if (!peopleList) {
+        if (!dataList){
             return <Spinner/>
         }
 
         return(
-            <Container fluid className='ps-4 pt-1 px-4'>
-                <ul className='item-list-bar p-3 me-2 ms-2'>
-                    {items}
-                </ul>
+            <Container fluid className='ps-4 pt-1 px-1'>
+                <ui>
+                    {renderItem}
+                </ui>
             </Container>
         )
     }
