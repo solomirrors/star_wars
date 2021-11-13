@@ -2,6 +2,22 @@ import React, {Component} from "react";
 import ItemList from "../item-list";
 import PersonDetails from "../person-details";
 import SwapiService from "../../services/swapi-service";
+import {Col, Container, Row} from "react-bootstrap";
+
+const PeopleMarkup = ({markLeft, markRight}) => {
+    return(
+        <Container>
+            <Row>
+                <Col>
+                    {markLeft}
+                </Col>
+                <Col>
+                    {markRight}
+                </Col>
+            </Row>
+        </Container>
+    );
+}
 
 export default class PeoplePage extends Component{
     swapiService = new SwapiService();
@@ -25,19 +41,20 @@ export default class PeoplePage extends Component{
         if (this.state.hasError)
             return <div>Component Error</div>
 
+        const itemList = (
+            <ItemList
+                onItemSelected = {this.onPersonSelected}
+                getData = {this.swapiService.getAllPeople}
+                renderItem = {(item) => item.Name}
+            />
+        )
+
+        const personDetails = (
+            <PersonDetails personId={this.state.selectedPerson}/>
+        )
+
         return(
-            <div>
-                <div>
-                    <ItemList
-                        onItemSelected = {this.onPersonSelected}
-                        getData = {this.swapiService.getAllPeople}
-                        renderItem = {(item) => item.Name}
-                    />
-                </div>
-                <div>
-                    <PersonDetails personId={this.state.selectedPerson}/>
-                </div>
-            </div>
+            <PeopleMarkup markLeft={itemList} markRight={personDetails}/>
         )
     }
 }

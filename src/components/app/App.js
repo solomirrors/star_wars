@@ -6,6 +6,7 @@ import PersonDetails from "../person-details";
 import {Col, Container, Image, Row} from "react-bootstrap";
 import './App.css';
 import SwapiService from "../../services/swapi-service";
+import PeoplePage from "../people-page";
 
 export default class App extends Component{
     swapiService = new SwapiService();
@@ -37,15 +38,19 @@ export default class App extends Component{
                 <RandomElements
                     create='person'
                     randomMin={1}
-                    randomMax={82}/>
+                    randomMax={82}
+                />
                 <RandomElements
                     create='planet'
                     randomMin={1}
-                    randomMax={60}/>
+                    randomMax={60}
+                />
                 <RandomElements
                     create='starship'
                     randomMin={1}
-                    randomMax={36}/>
+                    randomMax={36}
+                />
+                <PeoplePage/>
                 <ItemList
                     onItemSelected = {this.onPersonSelected}
                     getData = {this.swapiService.getAllPeople}
@@ -58,17 +63,8 @@ export default class App extends Component{
                             <div>
                                 <span>{desc_6}:{personGender}</span>
                             </div>
-                        </React.Fragment>}
-                />
-                <ItemList
-                    onItemSelected = {this.onPersonSelected}
-                    getData = {this.swapiService.getAllPlanets}
-                    renderItem = {(item) => item.Name}
-                />
-                <ItemList
-                    onItemSelected = {this.onPersonSelected}
-                    getData = {this.swapiService.getAllStarships}
-                    renderItem = {(item) => item.Name}
+                        </React.Fragment>
+                    }
                 />
                 <PersonDetails
                     personId = {this.state.selectedPerson}
