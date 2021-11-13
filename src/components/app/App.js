@@ -49,14 +49,26 @@ export default class App extends Component{
                 <ItemList
                     onItemSelected = {this.onPersonSelected}
                     getData = {this.swapiService.getAllPeople}
+                    renderItem = {({Name, desc_5, personBirthYear,desc_6, personGender}) =>
+                        <React.Fragment>
+                            {Name}
+                            <div>
+                                <span>{desc_5}:{personBirthYear}</span>
+                            </div>
+                            <div>
+                                <span>{desc_6}:{personGender}</span>
+                            </div>
+                        </React.Fragment>}
                 />
                 <ItemList
                     onItemSelected = {this.onPersonSelected}
                     getData = {this.swapiService.getAllPlanets}
+                    renderItem = {(item) => item.Name}
                 />
                 <ItemList
                     onItemSelected = {this.onPersonSelected}
                     getData = {this.swapiService.getAllStarships}
+                    renderItem = {(item) => item.Name}
                 />
                 <PersonDetails
                     personId = {this.state.selectedPerson}

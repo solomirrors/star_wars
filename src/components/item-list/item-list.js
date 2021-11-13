@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import {Container, Row} from "react-bootstrap";
 import './item-list.css'
-import SwapiService from "../../services/swapi-service";
 import Spinner from "../spinner";
 
 export default class ItemList extends Component {
@@ -23,13 +22,17 @@ export default class ItemList extends Component {
 
     renderItemList(arr) {
         if (arr){
-            return arr.map(({Id, Name}) => {
+            return arr.map((item) => {
+
+                const { Id } = item;
+                const label = this.props.renderItem(item);
+
                 return(
                     <li
                         key={Id}
                         onClick={() => this.props.onItemSelected(Id)}
                     >
-                        {Name}
+                        {label}
                     </li>
                 );
             });
