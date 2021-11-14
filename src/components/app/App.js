@@ -8,7 +8,7 @@ import './App.css';
 import SwapiService from "../../services/swapi-service";
 import PeoplePage from "../people-page";
 import {Record} from "../item-details/item-details";
-import {PersonDetails, PersonList, PlanetList, StarshipList} from "../sw-components";
+import {PersonDetails, PersonList, PlanetDetails, PlanetList, StarshipDetails, StarshipList} from "../sw-components";
 
 export default class App extends Component{
     swapiService = new SwapiService();
@@ -34,28 +34,6 @@ export default class App extends Component{
             return <AppErrorIndicator/>
         }
 
-        const {getPerson, getStarship} = this.swapiService;
-
-        const personDetails = (
-            <ItemDetails
-                itemId = {11}
-                getData = {getPerson}
-            >
-                <Record label = "Gender: " field = "personGender" />
-                <Record label = "Birth Year: " field = "personBirthYear"/>
-            </ItemDetails>
-        )
-
-        const starshipDetails = (
-            <ItemDetails
-                itemId = {5}
-                getData = {getStarship}
-            >
-                <Record label = "Model: " field = "starshipModel" />
-                <Record label = "Consumables: " field = "starshipConsumables"/>
-            </ItemDetails>
-        )
-
         return (
             <React.Fragment>
                 <Header/>
@@ -75,17 +53,17 @@ export default class App extends Component{
                     randomMax={36}
                 />
 
-                <PersonList>
-                    { ({Name}) => <span>{Name}</span> }
-                </PersonList>
+                <PersonList/>
 
-                <PlanetList>
-                    { ({Name}) => <span>{Name}</span> }
-                </PlanetList>
+                <PlanetList/>
 
-                <PersonList>
-                    { ({Name}) => <span>{Name}</span> }
-                </PersonList>
+                <StarshipList/>
+
+                <PersonDetails itemId = {1}/>
+                <PlanetDetails itemId = {6}/>
+                <StarshipDetails itemId = {9}/>
+
+                <StarshipDetails itemId = {12}/>
 
             </React.Fragment>
     );
