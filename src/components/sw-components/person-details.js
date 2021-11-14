@@ -11,10 +11,10 @@ const PersonDetails = (props) => {
     )
 };
 
-const mapMethodsToProps = (swapiService) =>{
+const mapMethodsToProps = (swapiService) => {
     return {
-        getData: swapiService.getPerson
+        dataList: swapiService.getPerson
     }
-}
+};
 
-export default WithSwapi(PersonDetails, mapMethodsToProps);
+export default WithSwapi(mapMethodsToProps)(PersonDetails);
