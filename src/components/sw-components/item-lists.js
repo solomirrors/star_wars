@@ -14,19 +14,19 @@ const WithChildFunction = (Wrapped, Func) => {
 
 const mapPersonMethodsToProps = (swapiService) => {
     return {
-        getData: WithSwapi.getAllPeople
+        getData: swapiService.getAllPeople
     };
 };
 
 const mapPlanetMethodsToProps = (swapiService) => {
     return {
-        getData: WithSwapi.getAllPlanets
+        getData: swapiService.getAllPlanets
     };
 };
 
 const mapStarshipMethodsToProps = (swapiService) => {
     return {
-        getData: WithSwapi.getAllStarships
+        getData: swapiService.getAllStarships
     };
 };
 

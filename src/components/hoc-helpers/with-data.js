@@ -8,8 +8,6 @@ const withData = (View) => {
         };
 
         componentDidMount() {
-
-            console.log(this.props.getData())
             this.props.getData()
                 .then((dataList) => {
                     this.setState({
