@@ -4,7 +4,9 @@ import Spinner from "../spinner";
 const withData = (View) => {
     return class extends Component{
         state = {
-            dataList: null
+            dataList: null,
+            loading: true,
+            error: false
         };
 
         componentDidMount() {
@@ -18,19 +20,38 @@ const withData = (View) => {
         }
 
         withDataUpdate() {
+            this.setState({
+                loading: true,
+                error: false
+            });
             this.props.getData()
                 .then((dataList) => {
                     this.setState({
-                        dataList
+                        dataList,
+                        loading: false,
                     });
-                });
+                })
+                .catch(() => {
+                    this.setState({
+                        error: true,
+                        loading: false
+                    })
+                })
         }
 
         render() {
-            const {dataList} = this.state;
+            const {dataList, loading, error} = this.state;
 
-            if (!dataList){
+            if (!loading){
                 return <Spinner/>
+            }
+
+            if (error) {
+                return (
+                    <div>
+                        Error Component :(
+                    </div>
+                )
             }
 
             return <View {... this.props} dataList = {dataList}/>

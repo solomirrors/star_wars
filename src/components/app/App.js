@@ -4,34 +4,27 @@ import Header from "../header";
 import RandomElements from "../random-elements";
 import {Col, Container, Image, Row} from "react-bootstrap";
 import SwapiService from "../../services/swapi-service";
-import {PersonDetails, PersonList, PlanetDetails, PlanetList, StarshipDetails, StarshipList} from "../sw-components";
 import {SwapiServiceProvider} from "../sw-context";
 import ErrorBoundry from "../error-boundry";
 import DummyService from "../../services/dummy-service";
+import {PeoplePage, PlanetsPage, StarshipsPage} from "../pages";
 
 export default class App extends Component{
 
     state = {
         selectedPerson: 8,
         hasError: false,
-        swapiService: new DummyService()
+        swapiService: new SwapiService()
     }
 
     onServiceChange = () => {
         this.setState(({swapiService}) => {
             const Service = swapiService instanceof SwapiService ? DummyService : SwapiService;
             return{
-                swapiService: new Service
+                swapiService: new Service()
             }
         })
     }
-
-
-    onPersonSelected = (id) => {
-        this.setState({
-            selectedPerson: id
-        });
-    };
 
     componentDidCatch(error, errorInfo) {
         this.setState({hasError: true});
@@ -63,14 +56,9 @@ export default class App extends Component{
                         randomMin={1}
                         randomMax={36}
                     />
-
-                    <PersonList/>
-                    <PlanetList/>
-                    <StarshipList/>
-
-                    <PersonDetails itemId = {1}/>
-                    <PlanetDetails itemId = {6}/>
-                    <StarshipDetails itemId = {12}/>
+                    <PeoplePage/>
+                    <PlanetsPage/>
+                    <StarshipsPage/>
                 </SwapiServiceProvider>
             </ErrorBoundry>
     );

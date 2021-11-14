@@ -15,14 +15,14 @@ const ItemList = (props) => {
             >
                 {label}
             </li>
-        )
+        );
     });
 
     return(
         <Container fluid className='ps-4 pt-1 px-1'>
-            <ui>
+            <ul>
                 {items}
-            </ui>
+            </ul>
         </Container>
     )
 }
