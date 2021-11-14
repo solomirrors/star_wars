@@ -1,58 +1,30 @@
-import React, {Component} from "react";
-import {Container, Row} from "react-bootstrap";
+import React from "react";
 import './item-list.css'
-import Spinner from "../spinner";
+import {Container} from "react-bootstrap";
 
-export default class ItemList extends Component {
+const ItemList = (props) => {
+    const { dataList, onItemSelected, children: renderLabel } = props;
 
-    state = {
-        dataList: null
-    };
-
-    componentDidMount() {
-        const { getData } = this.props;
-
-        getData()
-            .then((dataList) => {
-                this.setState({
-                    dataList
-                });
-            });
-    };
-
-    renderItemList(arr) {
-        if (arr){
-            return arr.map((item) => {
-
-                const { Id } = item;
-                const label = this.props.children(item);
-
-                return(
-                    <li
-                        key={Id}
-                        onClick={() => this.props.onItemSelected(Id)}
-                    >
-                        {label}
-                    </li>
-                );
-            });
-        };
-    };
-
-    render() {
-        const {dataList} = this.state;
-        const renderItem = this.renderItemList(dataList);
-
-        if (!dataList){
-            return <Spinner/>
-        }
-
+    const items = dataList.map((item) => {
+        const { Id } = item;
+        const label = renderLabel(item);
         return(
-            <Container fluid className='ps-4 pt-1 px-1'>
-                <ui>
-                    {renderItem}
-                </ui>
-            </Container>
+            <li
+                key={Id}
+                onClick={() => onItemSelected(Id)}
+            >
+                {label}
+            </li>
         )
-    }
+    });
+
+    return(
+        <Container fluid className='ps-4 pt-1 px-1'>
+            <ui>
+                {items}
+            </ui>
+        </Container>
+    )
 }
+
+export default ItemList;

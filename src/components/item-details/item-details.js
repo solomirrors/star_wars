@@ -4,6 +4,22 @@ import './item-details.css'
 import SwapiService from "../../services/swapi-service";
 import Spinner from "../spinner";
 
+
+const Record = ({item, field, label}) => {
+    return(
+        <React.Fragment>
+            <li>
+                <span>{label}</span>
+                <span>{item[field]}</span>
+            </li>
+        </React.Fragment>
+    );
+}
+
+export {
+    Record
+};
+
 export default class ItemDetails extends Component{
     swapiService = new SwapiService();
 
@@ -18,7 +34,7 @@ export default class ItemDetails extends Component{
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.props.itemId !== prevProps.itemId){
-            this.updateitem();
+            this.updateItem();
         }
     }
 
@@ -42,9 +58,9 @@ export default class ItemDetails extends Component{
             )
         }
 
-        const {Id, Name, Url, personHeight, personMass, personHairColor} = this.state.item
+        const {loading, item} = this.state;
 
-        const {loading} = this.state;
+        const {Url} = item
 
         const Content = () => {
             return(
@@ -54,10 +70,13 @@ export default class ItemDetails extends Component{
                     </Col>
                     <Col md={8}>
                         <Row className='row-cols-2'>
-                            <Col>{Name}</Col>
-                            <Col>{personHeight}</Col>
-                            <Col>{personMass}</Col>
-                            <Col>{personHairColor}</Col>
+                            <ul>
+                                {
+                                    React.Children.map(this.props.children, (child) => {
+                                        return React.cloneElement(child, {item});
+                                    })
+                                }
+                            </ul>
                         </Row>
                     </Col>
                 </React.Fragment>
@@ -76,3 +95,4 @@ export default class ItemDetails extends Component{
         )
     }
 }
+

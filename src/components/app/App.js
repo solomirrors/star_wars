@@ -7,6 +7,8 @@ import {Col, Container, Image, Row} from "react-bootstrap";
 import './App.css';
 import SwapiService from "../../services/swapi-service";
 import PeoplePage from "../people-page";
+import {Record} from "../item-details/item-details";
+import {PersonDetails, PersonList, PlanetList, StarshipList} from "../sw-components";
 
 export default class App extends Component{
     swapiService = new SwapiService();
@@ -38,14 +40,20 @@ export default class App extends Component{
             <ItemDetails
                 itemId = {11}
                 getData = {getPerson}
-            />
+            >
+                <Record label = "Gender: " field = "personGender" />
+                <Record label = "Birth Year: " field = "personBirthYear"/>
+            </ItemDetails>
         )
 
         const starshipDetails = (
             <ItemDetails
                 itemId = {5}
                 getData = {getStarship}
-            />
+            >
+                <Record label = "Model: " field = "starshipModel" />
+                <Record label = "Consumables: " field = "starshipConsumables"/>
+            </ItemDetails>
         )
 
         return (
@@ -67,11 +75,17 @@ export default class App extends Component{
                     randomMax={36}
                 />
 
-                <Row>
-                    <Col>{personDetails}</Col>
-                    <Col>{starshipDetails}</Col>
-                </Row>
+                <PersonList>
+                    { ({Name}) => <span>{Name}</span> }
+                </PersonList>
 
+                <PlanetList>
+                    { ({Name}) => <span>{Name}</span> }
+                </PlanetList>
+
+                <PersonList>
+                    { ({Name}) => <span>{Name}</span> }
+                </PersonList>
 
             </React.Fragment>
     );
