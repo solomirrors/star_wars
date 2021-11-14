@@ -1,14 +1,12 @@
 import React, {Component} from "react";
+import './App.css';
 import Header from "../header";
 import RandomElements from "../random-elements";
-import ItemList from "../item-list";
-import ItemDetails from "../item-details";
 import {Col, Container, Image, Row} from "react-bootstrap";
-import './App.css';
 import SwapiService from "../../services/swapi-service";
-import PeoplePage from "../people-page";
-import {Record} from "../item-details/item-details";
 import {PersonDetails, PersonList, PlanetDetails, PlanetList, StarshipDetails, StarshipList} from "../sw-components";
+import {SwapiServiceProvider, SwapiServiceConsumer} from "../sw-context";
+import ErrorBoundry from "../error-boundry";
 
 export default class App extends Component{
     swapiService = new SwapiService();
@@ -35,37 +33,34 @@ export default class App extends Component{
         }
 
         return (
-            <React.Fragment>
-                <Header/>
-                <RandomElements
-                    create='person'
-                    randomMin={1}
-                    randomMax={82}
-                />
-                <RandomElements
-                    create='planet'
-                    randomMin={1}
-                    randomMax={60}
-                />
-                <RandomElements
-                    create='starship'
-                    randomMin={1}
-                    randomMax={36}
-                />
+            <ErrorBoundry>
+                <SwapiServiceProvider value={this.swapiService}>
+                    <Header/>
+                    <RandomElements
+                        create='person'
+                        randomMin={1}
+                        randomMax={82}
+                    />
+                    <RandomElements
+                        create='planet'
+                        randomMin={1}
+                        randomMax={60}
+                    />
+                    <RandomElements
+                        create='starship'
+                        randomMin={1}
+                        randomMax={36}
+                    />
 
-                <PersonList/>
+                    <PersonList/>
+                    <PlanetList/>
+                    <StarshipList/>
 
-                <PlanetList/>
-
-                <StarshipList/>
-
-                <PersonDetails itemId = {1}/>
-                <PlanetDetails itemId = {6}/>
-                <StarshipDetails itemId = {9}/>
-
-                <StarshipDetails itemId = {12}/>
-
-            </React.Fragment>
+                    <PersonDetails itemId = {1}/>
+                    <PlanetDetails itemId = {6}/>
+                    <StarshipDetails itemId = {9}/>
+                </SwapiServiceProvider>
+            </ErrorBoundry>
     );
   };
 };
