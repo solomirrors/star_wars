@@ -1,8 +1,8 @@
 import React from "react";
-import {Container, Row, Col} from "react-bootstrap";
+import {Container, Row, Col, Button} from "react-bootstrap";
 import './header.css'
 
-const Header = () => {
+const Header = ({onServiceChange}) => {
     return(
         <Container fluid>
             <Row className='header-bar p-4'>
@@ -11,14 +11,17 @@ const Header = () => {
                 </Col>
                 <Col md={9}>
                     <Row>
-                        <Col className='header-link-panel p-0' sm={4}>
+                        <Col className='header-link-panel p-0' sm={3}>
                             <a className='header-link' href='https://github.com/solomirrors/star_wars'>People</a>
                         </Col>
-                        <Col className='header-link-panel p-0' sm={4}>
+                        <Col className='header-link-panel p-0' sm={3}>
                             <a className='header-link' href='https://github.com/solomirrors/star_wars'>Planets</a>
                         </Col>
-                        <Col className='header-link-panel p-0' sm={4}>
+                        <Col className='header-link-panel p-0' sm={3}>
                             <a className='header-link' href='https://github.com/solomirrors/star_wars'>Starships</a>
+                        </Col>
+                        <Col className='header-link-panel p-0' sm={3}>
+                            <Button onClick={onServiceChange}>Change</Button>
                         </Col>
                     </Row>
                 </Col>
