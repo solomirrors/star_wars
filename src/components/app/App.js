@@ -58,7 +58,7 @@ export default class App extends Component{
 
                     <PersonDetails itemId = {1}/>
                     <PlanetDetails itemId = {6}/>
-                    <StarshipDetails itemId = {9}/>
+                    <StarshipDetails itemId = {12}/>
                 </SwapiServiceProvider>
             </ErrorBoundry>
     );
