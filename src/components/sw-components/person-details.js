@@ -13,7 +13,7 @@ const PersonDetails = (props) => {
 
 const mapMethodsToProps = (swapiService) => {
     return {
-        dataList: swapiService.getPerson
+        getData: swapiService.getPerson
     }
 };
 

@@ -5,7 +5,7 @@ import {Container} from "react-bootstrap";
 const ItemList = (props) => {
     const { dataList, onItemSelected, children: renderLabel } = props;
 
-   const items =
+    const items =
         dataList.map((item) => {
             const { Id } = item;
             const label = renderLabel(item);

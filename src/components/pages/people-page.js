@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import {Col, Row} from "react-bootstrap";
-import {PersonDetails, PersonList} from "../sw-components";
+import {PersonList, PersonDetails} from "../sw-components";
 
-export default class PeoplePage extends Component{
+export default class PlanetsPage extends Component{
     state = {
         selectedItem: null
     }
@@ -27,5 +27,4 @@ export default class PeoplePage extends Component{
             </Row>
         )
     }
-
 }

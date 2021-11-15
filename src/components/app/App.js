@@ -62,8 +62,8 @@ export default class App extends Component{
                 </SwapiServiceProvider>
             </ErrorBoundry>
     );
-  };
-};
+  }
+}
 
 const AppErrorIndicator = () => {
     return(
