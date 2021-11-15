@@ -5,6 +5,10 @@ import Spinner from "../spinner";
 import './random-elements.css'
 
 export default class randomElements extends Component {
+    static defaultProps = {
+        updateInterval: 8000
+    }
+
     swapiService = new SwapiService();
 
     state = {
@@ -14,10 +18,11 @@ export default class randomElements extends Component {
     }
 
     componentDidMount(props) {
+        const { updateInterval } = this.props
         this.timeout =
             setTimeout(this.onUpgradeRandomElements, 500, this.props.create, this.props.randomMin, this.props.randomMax);
         this.interval
-            = setInterval(this.onUpgradeRandomElements, 8000, this.props.create, this.props.randomMin, this.props.randomMax);
+            = setInterval(this.onUpgradeRandomElements, updateInterval, this.props.create, this.props.randomMin, this.props.randomMax);
     }
 
     componentWillUnmount() {
@@ -70,6 +75,8 @@ export default class randomElements extends Component {
         );
     };
 };
+
+
 
 const ErrorIndicator = () => {
     return(
