@@ -3,6 +3,7 @@ import SwapiService from "../../services/swapi-service";
 import {Col, Container, Image, Row} from "react-bootstrap";
 import Spinner from "../spinner";
 import './random-elements.css'
+import PropTypes from "prop-types";
 
 export default class randomElements extends Component {
     static defaultProps = {
@@ -10,14 +11,7 @@ export default class randomElements extends Component {
     }
 
     static propTypes = {
-        updateInterval: (props, propName, componentName) => {
-            const value = props[propName];
-            if (typeof value === 'number' && !isNaN(value)){
-                return null;
-            }
-
-            return new TypeError(`${componentName}:${propName} must be number`);
-        }
+        updateInterval: PropTypes.number
     }
 
     swapiService = new SwapiService();
