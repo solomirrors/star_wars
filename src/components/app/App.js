@@ -1,13 +1,14 @@
 import React, {Component} from "react";
 import './App.css';
-import Header from "../header";
-import RandomElements from "../random-elements";
 import {Col, Container, Image, Row} from "react-bootstrap";
 import SwapiService from "../../services/swapi-service";
 import {SwapiServiceProvider} from "../sw-context";
 import ErrorBoundry from "../error-boundry";
 import DummyService from "../../services/dummy-service";
-import {PeoplePage, PlanetsPage, StarshipsPage} from "../pages";
+import {MainPage, PeoplePage, PlanetsPage, StarshipsPage} from "../pages";
+import {BrowserRouter, Routes, Route, useParams} from "react-router-dom";
+import Header from "../header";
+import {StarshipList} from "../sw-components";
 
 export default class App extends Component{
 
@@ -38,31 +39,28 @@ export default class App extends Component{
         return (
             <ErrorBoundry>
                 <SwapiServiceProvider value={this.state.swapiService}>
-                    <Header
-                        onServiceChange={this.onServiceChange}
-                    />
-                    <RandomElements
-                        create='person'
-                        randomMin={1}
-                        randomMax={82}
-                    />
-                    <RandomElements
-                        create='planet'
-                        randomMin={1}
-                        randomMax={60}
-                    />
-                    <RandomElements
-                        create='starship'
-                        randomMin={1}
-                        randomMax={36}
-                    />
-                    <PeoplePage/>
-                    <PlanetsPage/>
-                    <StarshipsPage/>
+                    <BrowserRouter>
+                        <Header
+                            onServiceChange={this.onServiceChange}
+                        />
+                        <Routes>
+                            <Route exact path="/" element={<MainPage/>}/>
+                            <Route exact path="people" element={<PeoplePage/>}/>
+                            <Route exact path="planets" element={<PlanetsPage/>}/>
+                            <Route exact path="starships" element={<Invoice/>}>
+                                <Route exact path=":invoiceId" element={<StarshipList/>}/>
+                            </Route>
+                        </Routes>
+                    </BrowserRouter>
                 </SwapiServiceProvider>
             </ErrorBoundry>
     );
   }
+}
+
+function Invoice() {
+    let { invoiceId } = useParams();
+    return <h1>Invoice {invoiceId}</h1>;
 }
 
 const AppErrorIndicator = () => {

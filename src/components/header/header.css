@@ -6,7 +6,7 @@
 
 .header-star-wars{
     font-size: 72px;
-    font-family: 'Teko';
+    font-family: 'Teko', serif;
     font-weight: 700;
     color: #f6ff00;
     line-height: 1;
@@ -15,6 +15,10 @@
     align-content: center;
     justify-content: center;
     text-align: center;
+}
+
+.header-star-wars:hover{
+    color: #f6ff00;
 }
 
 .header-link-panel{
