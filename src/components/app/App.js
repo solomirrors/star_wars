@@ -5,16 +5,25 @@ import SwapiService from "../../services/swapi-service";
 import {SwapiServiceProvider} from "../sw-context";
 import ErrorBoundry from "../error-boundry";
 import DummyService from "../../services/dummy-service";
-import {MainPage, PeoplePage, PlanetsPage, StarshipsPage} from "../pages";
-import {BrowserRouter, Routes, Route, useParams} from "react-router-dom";
+import {LoginPage, MainPage, PeoplePage, PlanetsPage, SecretPage, StarshipsPage} from "../pages";
+import {BrowserRouter, Routes, Route, useParams, Outlet, Navigate} from "react-router-dom";
 import Header from "../header";
-import {PersonDetails, PlanetDetails, StarshipDetails, StarshipList} from "../sw-components";
+import {PersonDetails, PlanetDetails, StarshipDetails} from "../sw-components";
+
 
 export default class App extends Component{
     state = {
         selectedPerson: 8,
         hasError: false,
-        swapiService: new SwapiService()
+        swapiService: new SwapiService(),
+        isLoggedIn: false
+    }
+
+    onLogin = () => {
+        this.setState({
+            isLoggedIn: true
+        })
+       console.log(this.state.isLoggedIn)
     }
 
     onServiceChange = () => {
@@ -35,6 +44,8 @@ export default class App extends Component{
             return <AppErrorIndicator/>
         }
 
+        const {isLoggedIn} = this.state
+
 
         return (
             <ErrorBoundry>
@@ -45,15 +56,20 @@ export default class App extends Component{
                         />
                         <Routes>
                             <Route path="/" element={<MainPage/>}/>
-                            <Route path="people" element={<PeoplePage/>}>
+                            <Route path="people" element={<Outlet/>}>
+                                <Route path="" element={<PeoplePage/>}/>
                                 <Route path=":itemId" element={<PersonPathItemId/>}/>
                             </Route>
-                            <Route path="planets" element={<PlanetsPage/>}>
+                            <Route path="planets" element={<Outlet/>}>
+                                <Route path="" element={<PlanetsPage/>}/>
                                 <Route path=":itemId" element={<PlanetsPathItemId/>}/>
                             </Route>
-                            <Route path="starships/*" element={<StarshipsPage/>}>
+                            <Route path="starships" element={<Outlet/>}>
+                                <Route path="" element={<StarshipsPage/>}/>
                                 <Route path=":itemId" element={<StarshipsPathItemId/>}/>
                             </Route>
+                            <Route path="login" element={<LoginPage isLoggedIn={isLoggedIn} onLogin={this.onLogin}/>}/>
+                            <Route path="secret" element={<SecretPage isLoggedIn={isLoggedIn}/>}/>
                         </Routes>
                     </BrowserRouter>
                 </SwapiServiceProvider>

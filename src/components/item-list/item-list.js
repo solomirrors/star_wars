@@ -16,7 +16,7 @@ const ItemList = (props) => {
                     key={Id}
                     onClick={() => onItemSelected(Id)}
                 >
-                    <Link to={Id}>{label}</Link>
+                    {label}
                 </li>
             );
         });
