@@ -8,10 +8,9 @@ import DummyService from "../../services/dummy-service";
 import {MainPage, PeoplePage, PlanetsPage, StarshipsPage} from "../pages";
 import {BrowserRouter, Routes, Route, useParams} from "react-router-dom";
 import Header from "../header";
-import {StarshipList} from "../sw-components";
+import {PersonDetails, PlanetDetails, StarshipDetails, StarshipList} from "../sw-components";
 
 export default class App extends Component{
-
     state = {
         selectedPerson: 8,
         hasError: false,
@@ -36,6 +35,7 @@ export default class App extends Component{
             return <AppErrorIndicator/>
         }
 
+
         return (
             <ErrorBoundry>
                 <SwapiServiceProvider value={this.state.swapiService}>
@@ -44,11 +44,15 @@ export default class App extends Component{
                             onServiceChange={this.onServiceChange}
                         />
                         <Routes>
-                            <Route exact path="/" element={<MainPage/>}/>
-                            <Route exact path="people" element={<PeoplePage/>}/>
-                            <Route exact path="planets" element={<PlanetsPage/>}/>
-                            <Route exact path="starships" element={<Invoice/>}>
-                                <Route exact path=":invoiceId" element={<StarshipList/>}/>
+                            <Route path="/" element={<MainPage/>}/>
+                            <Route path="people" element={<PeoplePage/>}>
+                                <Route path=":itemId" element={<PersonPathItemId/>}/>
+                            </Route>
+                            <Route path="planets" element={<PlanetsPage/>}>
+                                <Route path=":itemId" element={<PlanetsPathItemId/>}/>
+                            </Route>
+                            <Route path="starships/*" element={<StarshipsPage/>}>
+                                <Route path=":itemId" element={<StarshipsPathItemId/>}/>
                             </Route>
                         </Routes>
                     </BrowserRouter>
@@ -58,9 +62,25 @@ export default class App extends Component{
   }
 }
 
-function Invoice() {
-    let { invoiceId } = useParams();
-    return <h1>Invoice {invoiceId}</h1>;
+function PersonPathItemId () {
+    let params = useParams();
+    return(
+        <PersonDetails itemId={params.itemId}/>
+    )
+}
+
+function PlanetsPathItemId () {
+    let params = useParams();
+    return(
+        <PlanetDetails itemId={params.itemId}/>
+    )
+}
+
+function StarshipsPathItemId () {
+    let params = useParams();
+    return(
+        <StarshipDetails itemId={params.itemId}/>
+    )
 }
 
 const AppErrorIndicator = () => {

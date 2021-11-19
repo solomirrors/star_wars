@@ -2,6 +2,7 @@ import React from "react";
 import './item-list.css'
 import {Container} from "react-bootstrap";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 
 const ItemList = (props) => {
     const { dataList, onItemSelected, children: renderLabel } = props;
@@ -15,7 +16,7 @@ const ItemList = (props) => {
                     key={Id}
                     onClick={() => onItemSelected(Id)}
                 >
-                    {label}
+                    <Link to={Id}>{label}</Link>
                 </li>
             );
         });

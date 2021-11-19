@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {Col, Row} from "react-bootstrap";
 import {PlanetDetails, PlanetList} from "../sw-components";
+import {Outlet} from "react-router-dom";
 
 export default class PlanetsPage extends Component{
     state = {
@@ -22,7 +23,7 @@ export default class PlanetsPage extends Component{
                     <PlanetList onItemSelected = {this.onItemSelected}/>
                 </Col>
                 <Col>
-                    <PlanetDetails itemId = {selectedItem}/>
+                    <Outlet/>
                 </Col>
             </Row>
         )
