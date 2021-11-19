@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
 const LoginPage = ({isLoggedIn, onLogin}) => {
     return (
@@ -7,7 +8,7 @@ const LoginPage = ({isLoggedIn, onLogin}) => {
             <button
                 onClick={onLogin}
             >
-                Login
+                <Link to="/secret">Login</Link>
             </button>
         </div>
     )
